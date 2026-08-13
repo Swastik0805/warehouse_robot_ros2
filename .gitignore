@@ -21,3 +21,4 @@ dataset/runs/*/events.out*
 # OS files
 .DS_Store
 Thumbs.db
+demo/raw_recording.mkv
