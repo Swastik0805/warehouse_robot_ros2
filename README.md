@@ -4,6 +4,8 @@ An autonomous mobile robot that maps a warehouse, localizes itself, navigates be
 
 ## Demo
 
+https://github.com/Swastik0805/warehouse_robot_ros2/raw/master/demo/warehouse_demo.mp4
+
 The robot receives a mission (e.g. "pick up from Shelf A, deliver to the delivery station"), autonomously navigates to the pickup location, visually confirms the package is present using a custom object detector, drives to the delivery point, and reports mission success with a confidence score — no manual intervention required.
 
 Goal accepted, navigating...
