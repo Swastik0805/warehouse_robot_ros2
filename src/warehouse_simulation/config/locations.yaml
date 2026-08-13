@@ -1,0 +1,25 @@
+locations:
+  shelf_a:
+    x: -1.5
+    y: 1.5
+    yaw: 0.0
+  shelf_b:
+    x: 1.5
+    y: 0.0
+    yaw: 0.0
+  shelf_c:
+    x: 1.5
+    y: 1.5
+    yaw: 0.0
+  pickup_station:
+    x: -5.0
+    y: 2.0
+    yaw: 0.0
+  delivery_station:
+    x: 5.0
+    y: -3.5
+    yaw: 0.0
+  home:
+    x: -1.5
+    y: 0.0
+    yaw: 0.0

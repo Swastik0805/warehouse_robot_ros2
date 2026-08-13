@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+<world name="warehouse">
+
+<physics name="1ms" type="ignored">
+<max_step_size>0.001</max_step_size>
+<real_time_factor>1.0</real_time_factor>
+</physics>
+
+<plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+<plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+<plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+<plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+<render_engine>ogre2</render_engine>
+</plugin>
+
+<light type="directional" name="sun">
+<cast_shadows>true</cast_shadows>
+<pose>0 0 10 0 0 0</pose>
+<diffuse>0.8 0.8 0.8 1</diffuse>
+<specular>0.2 0.2 0.2 1</specular>
+<direction>-0.5 0.1 -0.9</direction>
+</light>
+
+<model name="ground_plane">
+<static>true</static>
+<link name="link">
+<collision name="collision">
+<geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+</collision>
+<visual name="visual">
+<geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+<material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.8 0.8 0.8 1</diffuse></material>
+</visual>
+</link>
+</model>
+
+<!-- Perimeter walls: 14m x 10m -->
+
+<model name="wall_north">
+<static>true</static>
+<pose>0 5 0.75 0 0 0</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>14 0.2 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>14 0.2 1.5</size></box></geometry>
+<material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material></visual>
+</link>
+</model>
+
+<model name="wall_south">
+<static>true</static>
+<pose>0 -5 0.75 0 0 0</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>14 0.2 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>14 0.2 1.5</size></box></geometry>
+<material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material></visual>
+</link>
+</model>
+
+<model name="wall_east">
+<static>true</static>
+<pose>7 0 0.75 0 0 1.5708</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>10 0.2 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>10 0.2 1.5</size></box></geometry>
+<material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material></visual>
+</link>
+</model>
+
+<model name="wall_west">
+<static>true</static>
+<pose>-7 0 0.75 0 0 1.5708</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>10 0.2 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>10 0.2 1.5</size></box></geometry>
+<material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material></visual>
+</link>
+</model>
+
+<!-- Three shelf rows creating two aisles -->
+
+<model name="shelf_A">
+<static>true</static>
+<pose>-3 0 0.75 0 0 0</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>0.5 6 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>0.5 6 1.5</size></box></geometry>
+<material><ambient>0.8 0.5 0.2 1</ambient><diffuse>0.8 0.5 0.2 1</diffuse></material></visual>
+</link>
+</model>
+
+<model name="shelf_B">
+<static>true</static>
+<pose>0 0 0.75 0 0 0</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>0.5 6 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>0.5 6 1.5</size></box></geometry>
+<material><ambient>0.8 0.5 0.2 1</ambient><diffuse>0.8 0.5 0.2 1</diffuse></material></visual>
+</link>
+</model>
+
+<model name="shelf_C">
+<static>true</static>
+<pose>3 0 0.75 0 0 0</pose>
+<link name="link">
+<collision name="collision"><geometry><box><size>0.5 6 1.5</size></box></geometry></collision>
+<visual name="visual"><geometry><box><size>0.5 6 1.5</size></box></geometry>
+<material><ambient>0.8 0.5 0.2 1</ambient><diffuse>0.8 0.5 0.2 1</diffuse></material></visual>
+</link>
+</model>
+
+<!-- Delivery station: green floor marker, near south wall -->
+
+<model name="delivery_station_marker">
+<static>true</static>
+<pose>5 -3.5 0.01 0 0 0</pose>
+<link name="link">
+<visual name="visual">
+<geometry><box><size>1.5 1.5 0.02</size></box></geometry>
+<material><ambient>0.2 0.8 0.2 1</ambient><diffuse>0.2 0.8 0.2 1</diffuse></material>
+</visual>
+</link>
+</model>
+
+<!-- Package pickup marker near shelf_A -->
+
+<model name="pickup_marker">
+<static>true</static>
+<pose>-5 2 0.01 0 0 0</pose>
+<link name="link">
+<visual name="visual">
+<geometry><box><size>1.0 1.0 0.02</size></box></geometry>
+<material><ambient>0.9 0.9 0.1 1</ambient><diffuse>0.9 0.9 0.1 1</diffuse></material>
+</visual>
+</link>
+</model>
+
+<!-- Packages near shelves for perception (Phase 8) -->
+
+<include>
+<name>package_1</name>
+<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cardboard Box</uri>
+<pose>-2.7 1.0 0.8 0 0 0</pose>
+</include>
+
+<include>
+<name>package_2</name>
+<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cardboard Box</uri>
+<pose>0.3 0.5 0.8 0 0 0</pose>
+</include>
+
+<include>
+<name>package_3</name>
+<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Cardboard Box</uri>
+<pose>3.3 1.2 0.8 0 0 0</pose>
+</include>
+
+
+
+</world>
+</sdf>

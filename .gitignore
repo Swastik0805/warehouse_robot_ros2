@@ -1,0 +1,23 @@
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# YOLO training run logs (keep final weights, not every epoch's logs)
+dataset/runs/*/weights/last.pt
+dataset/runs/*/*.png
+dataset/runs/*/*.jpg
+dataset/runs/*/labels*
+dataset/runs/*/events.out*
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

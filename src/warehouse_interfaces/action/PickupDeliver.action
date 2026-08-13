@@ -1,0 +1,11 @@
+# Goal
+string pickup_location
+string delivery_location
+---
+# Result
+bool success
+string message
+---
+# Feedback
+string current_step
+float32 progress

@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<robot name="warehouse_robot">
+
+<link name="base_link">
+<visual>
+<geometry>
+<box size="0.4 0.3 0.15"/>
+</geometry>
+<material name="blue">
+<color rgba="0.2 0.2 0.8 1.0"/>
+</material>
+</visual>
+<collision>
+<geometry>
+<box size="0.4 0.3 0.15"/>
+</geometry>
+</collision>
+<inertial>
+<mass value="5.0"/>
+<inertia ixx="0.05" ixy="0.0" ixz="0" iyy="0.08" iyz="0" izz="0.1"/>
+</inertial>
+</link>
+
+<link name="left_wheel">
+<visual>
+<geometry>
+<cylinder radius="0.08" length="0.04"/>
+</geometry>
+<material name="black">
+<color rgba="0.1 0.1 0.1 1.0"/>
+</material>
+</visual>
+<collision>
+<geometry>
+<cylinder radius="0.08" length="0.04"/>
+</geometry>
+</collision>
+<inertial>
+<mass value="0.5"/>
+<inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+</inertial>
+</link>
+
+<joint name="left_wheel_joint" type="continuous">
+<parent link="base_link"/>
+<child link="left_wheel"/>
+<origin xyz="0.0 0.175 -0.05" rpy="-1.5708 0 0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+<link name="right_wheel">
+<visual>
+<geometry>
+<cylinder radius="0.08" length="0.04"/>
+</geometry>
+<material name="black">
+<color rgba="0.1 0.1 0.1 1.0"/>
+</material>
+</visual>
+<collision>
+<geometry>
+<cylinder radius="0.08" length="0.04"/>
+</geometry>
+</collision>
+<inertial>
+<mass value="0.5"/>
+<inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+</inertial>
+</link>
+
+<joint name="right_wheel_joint" type="continuous">
+<parent link="base_link"/>
+<child link="right_wheel"/>
+<origin xyz="0.0 -0.175 -0.05" rpy="-1.5708 0 0"/>
+<axis xyz="0 0 1"/>
+</joint>
+
+<link name="caster_wheel">
+<visual>
+<geometry>
+<sphere radius="0.08"/>
+</geometry>
+<material name="black">
+<color rgba="0.1 0.1 0.1 1.0"/>
+</material>
+</visual>
+<collision>
+<geometry>
+<sphere radius="0.08"/>
+</geometry>
+</collision>
+<inertial>
+<mass value="0.5"/>
+<inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+</inertial>
+</link>
+
+<joint name="caster_wheel_joint" type="fixed">
+<parent link="base_link"/>
+<child link="caster_wheel"/>
+<origin xyz="0.15 0.0 -0.05" rpy="0 0 0"/>
+</joint>
+
+<link name="lidar_link">
+<visual>
+<geometry>
+<cylinder radius="0.05" length="0.06"/>
+</geometry>
+<material name="red">
+<color rgba="0.8 0.1 0.1 1.0"/>
+</material>
+</visual>
+<collision>
+<geometry>
+<cylinder radius="0.05" length="0.06"/>
+</geometry>
+</collision>
+<inertial>
+<mass value="0.2"/>
+<inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
+</inertial>
+</link>
+
+<joint name="lidar_joint" type="fixed">
+<parent link="base_link"/>
+<child link="lidar_link"/>
+<origin xyz="0.0 0.0 0.13" rpy="0 0 0"/>
+</joint>
+<link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.03 0.09 0.03"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0.1 0.7 0.1 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.03 0.09 0.03"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.00005" ixy="0.0" ixz="0.0" iyy="0.00005" iyz="0.0" izz="0.00005"/>
+    </inertial>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.21 0.0 0.05" rpy="0 0 0"/>
+  </joint>
+
+  <gazebo reference="camera_link">
+    <material>Gazebo/Green</material>
+  </gazebo>
+
+  <gazebo reference="camera_link">
+    <sensor name="rgbd_camera" type="rgbd_camera">
+      <pose>0 0 0 0 0 0</pose>
+      <topic>camera</topic>
+      <frame_id>camera_link</frame_id>
+      <update_rate>15</update_rate>
+      <camera>
+        <horizontal_fov>1.047</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.1</near>
+          <far>10.0</far>
+        </clip>
+      </camera>
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+    </sensor>
+  </gazebo>
+
+<gazebo reference="base_link">
+<material>Gazebo/Blue</material>
+</gazebo>
+
+<gazebo reference="left_wheel">
+<material>Gazebo/Black</material>
+<mu1>1.0</mu1>
+<mu2>1.0</mu2>
+</gazebo>
+
+<gazebo reference="right_wheel">
+<material>Gazebo/Black</material>
+<mu1>1.0</mu1>
+<mu2>1.0</mu2>
+</gazebo>
+
+<gazebo reference="caster_wheel">
+<material>Gazebo/Black</material>
+<mu1>0.01</mu1>
+<mu2>0.01</mu2>
+</gazebo>
+
+<gazebo reference="lidar_link">
+<material>Gazebo/Red</material>
+</gazebo>
+
+<gazebo reference="lidar_link">
+<sensor name="lidar" type="gpu_lidar">
+<pose>0 0 0 0 0 0</pose>
+<topic>scan</topic>
+<frame_id>lidar_link</frame_id>
+<update_rate>10</update_rate>
+<lidar>
+<scan>
+<horizontal>
+<samples>360</samples>
+<resolution>1</resolution>
+<min_angle>-3.14159</min_angle>
+<max_angle>3.14159</max_angle>
+</horizontal>
+</scan>
+<range>
+<min>0.12</min>
+<max>10.0</max>
+<resolution>0.01</resolution>
+</range>
+</lidar>
+<always_on>true</always_on>
+<visualize>true</visualize>
+</sensor>
+</gazebo>
+
+<gazebo>
+<plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+<left_joint>left_wheel_joint</left_joint>
+<right_joint>right_wheel_joint</right_joint>
+<wheel_separation>0.35</wheel_separation>
+<wheel_radius>0.08</wheel_radius>
+<odom_publish_frequency>30</odom_publish_frequency>
+<topic>cmd_vel</topic>
+<odom_topic>odom</odom_topic>
+<tf_topic>tf</tf_topic>
+<frame_id>odom</frame_id>
+<child_frame_id>base_link</child_frame_id>
+<publish_odom>true</publish_odom>
+<publish_tf>true</publish_tf>
+<publish_wheel_tf>false</publish_wheel_tf>
+</plugin>
+</gazebo>
+
+<gazebo>
+<plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+<topic>joint_states</topic>
+</plugin>
+</gazebo>
+</robot>

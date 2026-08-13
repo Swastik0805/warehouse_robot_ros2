@@ -1,0 +1,6 @@
+path: /home/moharaga/warehouse_robot_ros2/dataset
+train: images/train
+val: images/val
+
+names:
+  0: package
