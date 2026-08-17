@@ -52,12 +52,18 @@ message: "Delivered package from 'shelf_a' to 'delivery_station' (detection conf
 
 warehouse_robot_ros2/
 ├── src/
+
 │ ├── warehouse_description/ # URDF/Xacro robot model
+
 │ ├── warehouse_simulation/ # Gazebo world, launch files, Nav2 config, named locations
+
 │ ├── warehouse_perception/ # Camera capture, YOLO detector node, fine-tuned model
+
 │ ├── warehouse_interfaces/ # Custom PickupDeliver.action definition
+
 │ └── warehouse_task_manager/ # Mission orchestration action server
 ├── maps/ # Saved occupancy grid maps
+
 └── dataset/ # Training images, labels, YOLO fine-tuning config
 
 
