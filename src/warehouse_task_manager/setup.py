@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'task_manager_node = warehouse_task_manager.task_manager_node:main',
+            'bt_task_manager_node = warehouse_task_manager.bt_task_manager_node:main',
         ],
     },
 )
